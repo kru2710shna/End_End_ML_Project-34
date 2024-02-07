@@ -2,8 +2,9 @@ import numpy as np
 from flask import Flask
 from flask import request, jsonify  ,render_template
 import pickle 
+
 # create app name 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="Template")
 
 #load the picke model 
 model = pickle.load(open("model.pkl", "rb"))
@@ -18,7 +19,7 @@ def Predict():
     features = [np.array(float_features)]
     prediction = model.predict(features)
     
-    return render_template("index.html", prediction_text= "The flower is {}".format(prediction))
+    return render_template("index.html", prediction_text= "The Weight is {}".format(prediction))
 
 if __name__ == "__main__":
     app.run(debug=True)
